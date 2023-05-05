@@ -15,7 +15,6 @@ public class BusinessTripsContext : IdentityDbContext<IdentityUser>
     public DbSet<ProjectTask> ProjectTasks { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<BusinessTrip> BusinessTrips { get; set; }
-    public DbSet<Role> Roles { get; set; }
 
     public BusinessTripsContext(DbContextOptions<BusinessTripsContext> options) : base(options)
     {
@@ -28,6 +27,7 @@ public class BusinessTripsContext : IdentityDbContext<IdentityUser>
         modelBuilder.SeedClientLocations();
         modelBuilder.SeedProjects();
         modelBuilder.SeedTasks();
+        modelBuilder.SeedRoles();
 
         modelBuilder.Entity<ProjectTask>(entity =>
         {

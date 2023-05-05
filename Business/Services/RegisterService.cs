@@ -33,6 +33,7 @@ public class RegisterService : IRegisterService
        
         await _emailStore.SetEmailAsync(user, input.Email, default);
         var result = await _userManager.CreateAsync(user, input.Password);
+        await _userManager.AddToRoleAsync(user, Role.Employee.ToString());
 
         if (!result.Succeeded)
         {
@@ -45,6 +46,7 @@ public class RegisterService : IRegisterService
         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
         await _userManager.ConfirmEmailAsync(user, code);
+
         return user;
     }
 }

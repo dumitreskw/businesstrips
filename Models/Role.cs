@@ -1,9 +1,9 @@
 ﻿namespace BusinessTrips.Models;
 
-public class Role
+public enum Role
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public ICollection<User> Users { get; set; }
+    Employee,
+    PM,
+    BTO,
+    Admin
 }

@@ -1,4 +1,5 @@
 ﻿using BusinessTrips.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessTrips.DataAccess.EFCore;
@@ -71,6 +72,38 @@ public static class SeedData
                     Name = "task1",
                     Number = "skvn",
                     ProjectId = 1
+                }
+            );
+    }
+
+    public static void SeedRoles(this ModelBuilder builder)
+    {
+        builder
+            .Entity<IdentityRole>()
+            .HasData(
+                new IdentityRole()
+                {
+                    Id = "1",
+                    Name = "PM",
+                    NormalizedName = "PM",
+                },
+                new IdentityRole()
+                {
+                    Id = "2",
+                    Name = "BTO",
+                    NormalizedName = "BTO",
+                },
+                new IdentityRole()
+                {
+                    Id = "0",
+                    Name = "Employee",
+                    NormalizedName = "EMPLOYEE",
+                },
+                new IdentityRole()
+                {
+                    Id = "3",
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",
                 }
             );
     }
