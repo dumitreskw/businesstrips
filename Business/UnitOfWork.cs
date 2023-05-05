@@ -1,7 +1,6 @@
 ﻿using BusinessTrips.Business.Interfaces;
 using BusinessTrips.DataAccess;
 using BusinessTrips.Models;
-using System;
 namespace BusinessTrips.Business;
 
 internal class UnitOfWork : IUnitOfWork

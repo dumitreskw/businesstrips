@@ -1,8 +1,7 @@
 ﻿using BusinessTrips.Business.Interfaces;
+using BusinessTrips.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System;
-using BusinessTrips.DataAccess;
 
 namespace BusinessTrips.Business;
 

@@ -1,14 +1,13 @@
-using BusinessTrips.DataAccess;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using BusinessTrips.Models;
-using BusinessTrips.Business.Interfaces;
-using BusinessTrips.Business;
-using BusinessTrips.Business.Interfaces.Services;
-using BusinessTrips.Business.Services;
-using NToastNotify;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
+using BusinessTrips.Business;
+using BusinessTrips.Business.Interfaces;
+using BusinessTrips.Business.Interfaces.Services;
+using BusinessTrips.Business.Services;
+using BusinessTrips.DataAccess;
+using BusinessTrips.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

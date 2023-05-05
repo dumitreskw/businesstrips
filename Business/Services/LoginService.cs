@@ -1,4 +1,4 @@
-﻿using BusinessTrips.Business.Interfaces;
+﻿using BusinessTrips.Business.DTOs;
 using BusinessTrips.Business.Interfaces.Services;
 using BusinessTrips.Models;
 using Microsoft.AspNetCore.Identity;
@@ -7,13 +7,10 @@ namespace BusinessTrips.Business.Services;
 
 public class LoginService : ILoginService
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly SignInManager<User> _signInManager;
 
-    public LoginService(IUnitOfWork unitOfWork,
-        SignInManager<User> signInManager)
+    public LoginService(SignInManager<User> signInManager)
     {
-        _unitOfWork = unitOfWork;
         _signInManager = signInManager;
     }
 
@@ -24,6 +21,11 @@ public class LoginService : ILoginService
         return true;
     }
 
+    public async Task<SignInResult> Login(LoginDTO input)
+    {
+        var userName = input.Email.Split('@', StringSplitOptions.None)[0];
+        var result = await _signInManager.PasswordSignInAsync(userName, input.Password, input.RememberMe, lockoutOnFailure: false);
 
-
+        return result;
+    }
 }
