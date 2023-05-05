@@ -1,10 +1,12 @@
 ﻿using BusinessTrips.DataAccess.EFCore;
 using BusinessTrips.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessTrips.DataAccess;
 
-public class BusinessTripsContext : DbContext
+public class BusinessTripsContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<User> Users { get; set; }
     public DbSet<CompanyHQ> companyHQs { get; set; }
