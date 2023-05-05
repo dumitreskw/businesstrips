@@ -1,7 +1,12 @@
+using BusinessTrips.DataAccess;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<BusinessTripsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BusinessTripsDb")));
 
 var app = builder.Build();
 
