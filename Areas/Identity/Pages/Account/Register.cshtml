@@ -3,64 +3,90 @@
 @{
     ViewData["Title"] = "Register";
 }
+<section>
+    <div class=" d-flex align-items-center h-70 gradient-custom-3">
+        <div class="container h-70">
+            <div class="row d-flex justify-content-center align-items-center h-70">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-3">SIGN UP</h2>
 
-<h1>@ViewData["Title"]</h1>
+                            <hr class="mt-2" />
 
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+                            <form method="post">
+                                <div asp-validation-summary="ModelOnly" class="alert alert-danger text-danger"></div>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Input.Email" class="form-label">Your Email</label>
+                                    <input asp-for="Input.Email" type="email" class="form-control form-control-lg" autocomplete="email" aria-required="true" placeholder="Email" />
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Input.Password" class="form-label">Password</label>
+                                    <input asp-for="Input.Password" type="password" class="form-control form-control-lg" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Input.ConfirmPassword" class="form-label">Repeat your password</label>
+                                    <input asp-for="Input.ConfirmPassword" type="password" class="form-control form-control-lg" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-3">
+                                    <div class="d-flex justify-content-center p-lg-3">
+                                        <input asp-for="Input.TCAccepted" type="checkbox" class="form-check-input" />
+                                        <label asp-for="Input.TCAccepted" class="text-center">
+                                            Please, read all statements in
+                                            <a href="#" class="text-warning" data-bs-toggle="modal" data-bs-target="#tcModal">
+                                                Terms and Conditions
+                                            </a>
+                                            before creating an account!
+                                        </label>
+                                    </div>
+                                    <span asp-validation-for="Input.TCAccepted" class="d-flex justify-content-center text-danger"></span>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button asp-page-handler="RegisterUser" type="submit" onclick="loading()" class="btn btn-success btn-block btn-lg">
+                                        Sign Up
+                                    </button>
+                                </div>
+
+                                <hr class="mt-4" />
+                                <p class="text-center text-muted mb-0">Already have an account? </p>
+                                <div class="d-flex justify-content-center mt-2">
+                                    <a role="button" asp-page="/Auth/Login" class="btn btn-primary btn-block btn-lg gradient-custom-4">Sign In</a>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                }
-            }
-        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="modal fade text-black" id="tcModal" tabindex="-1" role="dialog" aria-labelledby="tcModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Terms and Conditions</h5>
+                    <i class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"></i>
+                </div>
+                <div class="modal-body">
+                    @for (int i = 1; i <= 100; i++)
+                    {
+                        @:Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                    }
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
