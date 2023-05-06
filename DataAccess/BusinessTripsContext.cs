@@ -28,6 +28,8 @@ public class BusinessTripsContext : IdentityDbContext<IdentityUser>
         modelBuilder.SeedProjects();
         modelBuilder.SeedTasks();
         modelBuilder.SeedRoles();
+        modelBuilder.SeedAccounts();
+        modelBuilder.SeedUserRoles();
 
         modelBuilder.Entity<ProjectTask>(entity =>
         {

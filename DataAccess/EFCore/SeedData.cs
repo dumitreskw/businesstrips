@@ -6,6 +6,48 @@ namespace BusinessTrips.DataAccess.EFCore;
 
 public static class SeedData
 {
+    public static void SeedAccounts(this ModelBuilder builder)
+    {
+        var hasher = new PasswordHasher<User>();
+        builder
+            .Entity<User>()
+            .HasData(
+                new User
+                {
+                    Id = "8e445865-a24d-4543-a6c6-9443d048cdb7",
+                    UserName = "NoRole",
+                    NormalizedUserName = "NOROLE",
+                    Email = "norole@gmail.com",
+                    NormalizedEmail = "NOROLE@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "Pass_2002"),
+                    LockoutEnabled = true,
+                    EmailConfirmed = true
+                },
+                new User
+                {
+                    Id = "9c44780-a24d-4543-9cc6-0993d048aacu7",
+                    UserName = "Atmin",
+                    NormalizedUserName = "ATMIN",
+                    Email = "atmin@gmail.com",
+                    NormalizedEmail = "ATMIN@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "Pass_2002"),
+                    LockoutEnabled = true,
+                    EmailConfirmed = true
+                },
+                new User
+                {
+                    Id = "9a27620-a44f-4543-9dk6-0993d048sia7",
+                    UserName = "BTO",
+                    NormalizedUserName = "BTO",
+                    Email = "bto@gmail.com",
+                    NormalizedEmail = "BTO@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "Pass_2002"),
+                    LockoutEnabled = true,
+                    EmailConfirmed = true
+                }
+            );
+    }
+
     public static void SeedHQs(this ModelBuilder builder)
     {
         builder.Entity<CompanyHQ>().HasIndex(area => area.Name).IsUnique();
@@ -104,6 +146,28 @@ public static class SeedData
                     Id = "3",
                     Name = "Admin",
                     NormalizedName = "ADMIN",
+                }
+            );
+    }
+    public static void SeedUserRoles(this ModelBuilder builder)
+    {
+        builder
+            .Entity<IdentityUserRole<string>>()
+            .HasData(
+                new IdentityUserRole<string>()
+                {
+                    UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7",
+                    RoleId = "0"
+                },
+                new IdentityUserRole<string>()
+                {
+                    UserId = "9c44780-a24d-4543-9cc6-0993d048aacu7",
+                    RoleId = "3"
+                },
+                new IdentityUserRole<string>()
+                {
+                    UserId = "9a27620-a44f-4543-9dk6-0993d048sia7",
+                    RoleId = "2"
                 }
             );
     }

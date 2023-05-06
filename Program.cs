@@ -37,6 +37,7 @@ builder.Services.AddScoped<IBaseRepository<BusinessTrip, int>, BaseRepository<Bu
 
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();
@@ -63,5 +64,9 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{Controller=Home}/{action=Index}");
 
 app.Run();
